@@ -32,16 +32,17 @@ handle the Mistral sign-in.
 
 - Label: `Connect to Mistral`.
 - Placement: the adult's settings page or dashboard, wherever integrations live.
-- Behavior: opens this URL in a new tab:
-
-  ```
-  https://chat.mistral.ai/managed-agents/doslim-chat?source=agents_api
-  ```
-
-  Keep the `?source=agents_api` query parameter: without it the page may
-  answer "Page not found".
-- Store the URL as one constant, for example `MISTRAL_AGENT_URL`, in the
-  frontend config; do not build it from parts.
+- Behavior: opens the agent's canonical chat URL in a new tab.
+- Get the URL by copying it, never by building it: open chat.mistral.ai, go to
+  "All agents", open `doslim-chat` the normal way, and copy the full URL from
+  the browser's address bar once the chat is open. That URL is the canonical
+  deep link (it names the agent by its id, not by its name). A URL constructed
+  from the agent's name, such as
+  `https://chat.mistral.ai/managed-agents/doslim-chat?source=agents_api`, can
+  answer "Page not found"; do not use one.
+- Store the copied URL as one constant, for example `MISTRAL_AGENT_URL`, in the
+  frontend config; do not build it from parts. If the agent is ever redeployed
+  under a new id, re-copy the URL and update the constant.
 - Helper text under the button, one line, for example:
   "Opens a chat by Mistral. Sign in with your own Mistral account, then allow
   doslim once when asked. Drafts land in your doslim for review."
