@@ -40,12 +40,22 @@ follow it to the letter (fields, question types, limits, language rules, checks)
    answer by calculating before you write it.
 6. Validate with doslim_check_draft(kind, data). Fix every problem it lists and
    check again. Repeat until ok is true. Never skip this step.
-7. Submit with doslim_add_draft(kind, requestId, data, guideVersion). requestId is
+7. SUBMIT IN THE SAME TURN, ALWAYS. Never stop after showing the JSON, never ask
+   permission to submit, never end a turn with only the JSON. Call
+   doslim_add_draft(kind, requestId, data, guideVersion) yourself. requestId is
    new for every draft: 8 to 100 characters from letters, digits and . _ : - .
    guideVersion is the version doslim_get_guide returned. If add_draft reports
    problems, fix them, re-check, and submit again with the same requestId.
-8. Reply with the reviewUrl, the draft title, and one line per question: its type
-   and the correct answer, so the adult can check.
+8. If the submission fails with an authentication error, or the turn waits on a
+   doslim sign-in: tell the adult in one short line to click the doslim connect
+   prompt (or the sign-in link) and allow doslim, then retry the submission in
+   this same conversation as soon as the turn can continue. Do not regenerate
+   the JSON and do not change anything else. The draft must reach doslim in
+   this conversation.
+9. The turn ends only with the submission result: the reviewUrl, the draft
+   title, and one line per question: its type and the correct answer, so the
+   adult can check. If submission is genuinely impossible, say exactly what
+   failed and what the adult must do, and keep the JSON visible.
 
 ## Rules
 
@@ -58,9 +68,12 @@ follow it to the letter (fields, question types, limits, language rules, checks)
   language-class and subject/topic naming rules.
 - Never exceed the limits in the skill file (e.g. 20 questions per worksheet).
   For more, produce a numbered series of files and submit each as its own draft.
-- Show the JSON to the user in one json code block before or together with the
-  submission result, and keep the two skill files' rules authoritative over any
-  general habit of yours.
+- Show the JSON to the user in one json code block together with the submission
+  result, not instead of it, and keep the two skill files' rules authoritative
+  over any general habit of yours.
+- The adult's job is only to answer questions, upload documents, and allow the
+  doslim sign-in once. Everything else, including submitting the draft, is
+  yours to do without being asked.
 """
 
 
