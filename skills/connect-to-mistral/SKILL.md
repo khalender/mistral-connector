@@ -1,13 +1,13 @@
 ---
 name: connect-to-mistral-button
-description: Add a "Connect to Mistral" button to the doslim app that sends an adult from doslim.app to the doslim-agent chat on Mistral, using the adult's own Mistral account. Use when adding the Mistral integration entry point to doslim's settings or dashboard.
+description: Add a "Connect to Mistral" button to the doslim app that sends an adult from doslim.app to the doslim-chat agent on Mistral, using the adult's own Mistral account. Use when adding the Mistral integration entry point to doslim's settings or dashboard.
 ---
 
 # Add the "Connect to Mistral" button to doslim
 
 You add one button to doslim, an app for families. The button sends an adult
 (parent or teacher) from doslim to a chat agent hosted by Mistral. That agent
-("doslim-agent") turns documents into doslim worksheets and books and adds them
+("doslim-chat") turns documents into doslim worksheets and books and adds them
 as drafts to the adult's doslim account. You write no agent code, store no
 tokens and call no Mistral API: the button is a link, and Mistral's own pages
 handle the Mistral sign-in.
@@ -35,7 +35,7 @@ handle the Mistral sign-in.
 - Behavior: opens this URL in a new tab:
 
   ```
-  https://chat.mistral.ai/managed-agents/doslim-agent?source=agents_api
+  https://chat.mistral.ai/managed-agents/doslim-chat?source=agents_api
   ```
 
   Keep the `?source=agents_api` query parameter: without it the page may
@@ -53,7 +53,7 @@ handle the Mistral sign-in.
 
 1. Mistral asks them to sign in with their own Mistral account, if they are not
    already. This is Mistral's page, not doslim's.
-2. The doslim-agent chat opens. The agent asks what to make (worksheet or
+2. The doslim-chat page opens. The agent asks what to make (worksheet or
    book), the grade, the language (en, nl, de or fr) and for documents.
 3. The first time the agent adds a draft, Mistral shows a consent prompt for
    the doslim connector. The adult allows it, and doslim's own OAuth consent
