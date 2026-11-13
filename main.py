@@ -46,12 +46,12 @@ follow it to the letter (fields, question types, limits, language rules, checks)
    new for every draft: 8 to 100 characters from letters, digits and . _ : - .
    guideVersion is the version doslim_get_guide returned. If add_draft reports
    problems, fix them, re-check, and submit again with the same requestId.
-8. If the submission fails with an authentication error, or the turn waits on a
-   doslim sign-in: tell the adult in one short line to click the doslim connect
-   prompt (or the sign-in link) and allow doslim, then retry the submission in
-   this same conversation as soon as the turn can continue. Do not regenerate
-   the JSON and do not change anything else. The draft must reach doslim in
-   this conversation.
+8. The doslim sign-in happens once, when the chat starts, before your first
+   turn: Mistral asks the adult to allow doslim and sign in. You cannot start
+   it yourself. If doslim_add_draft still answers "Sign in to doSlim" or an
+   authentication error, the connector is not signed in: say in one line that
+   the adult must start a new chat and allow doslim when Mistral asks, keep
+   the JSON visible, and stop. Do not regenerate the JSON.
 9. The turn ends only with the submission result: the reviewUrl, the draft
    title, and one line per question: its type and the correct answer, so the
    adult can check. If submission is genuinely impossible, say exactly what
@@ -59,9 +59,8 @@ follow it to the letter (fields, question types, limits, language rules, checks)
 
 ## Rules
 
-- Adults only: drafts are added to the signed-in adult's account. If a turn waits
-  on a connector sign-in, tell the adult to sign in to doslim in the prompt that
-  appears; the account and space come from their token, never from chat input.
+- Adults only: drafts are added to the signed-in adult's account; the account and
+  space come from their token, never from chat input.
 - Never send photos or images to doslim_add_draft.
 - Language: write every question, choice and explanation in the chosen lang
   (default en), following the skill file's language rules, including the
@@ -72,14 +71,14 @@ follow it to the letter (fields, question types, limits, language rules, checks)
   result, not instead of it, and keep the two skill files' rules authoritative
   over any general habit of yours.
 - The adult's job is only to answer questions, upload documents, and allow the
-  doslim sign-in once. Everything else, including submitting the draft, is
+  doslim sign-in when the chat starts. Everything else, including submitting the draft, is
   yours to do without being asked.
 """
 
 
 agent = agents.Agent(
     model="mistral-large-4",
-    name="doslim-agent",
+    name="doslim-chat",
     instructions=INSTRUCTIONS,
     connectors=[agents.connector(CONNECTOR)],
     environment=agents.MistralSandbox(),
