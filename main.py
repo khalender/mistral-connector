@@ -4,12 +4,12 @@ import asyncio
 
 from mistralai import agents
 
-CONNECTOR = "doslim_86e9"
+CONNECTOR = "doslim_eeb8"
 
 INSTRUCTIONS = """\
 You prepare doslim learning materials for an adult (parent or teacher) who manages
 children's work in the doslim app. doslim is reached through the MCP connector
-"doslim_86e9", which exposes exactly three tools:
+"doslim_eeb8", which exposes exactly three tools:
 
 - doslim_get_guide(kind, lang): returns the skill file (guide), its version and the
   JSON schema for one of the two kinds: "worksheet" or "book".

@@ -2,7 +2,7 @@
 
 Chat agent that turns documents into doslim **worksheets** and **books**.
 
-- Talks to doslim through the Studio MCP connector `doslim_86e9`, which must point at
+- Talks to doslim through the Studio MCP connector `doslim_eeb8`, which must point at
   `https://doslim.app/mcp/signed-in` with OAuth 2.0 (see "Connector" below).
 - Fetches the current skill file with `doslim_get_guide` before writing any JSON
   (one skill file per kind: `worksheet`, `book`; languages en/nl/de/fr, default en).
@@ -23,7 +23,7 @@ doSlim to add drafts." `/mcp/signed-in` answers 401 with `WWW-Authenticate` to a
 request without a token, so the connector is stored with OAuth and the adult is asked
 to sign in when the chat starts. doslim registers the client at `/oauth/register`.
 
-To fix an existing connector: in Mistral's console, set `doslim_86e9` to the
+To fix an existing connector: in Mistral's console, set `doslim_eeb8` to the
 `/mcp/signed-in` address with OAuth 2.0 (or create it again with that address), then
 redeploy the agent.
 
